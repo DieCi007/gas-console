@@ -1,0 +1,15 @@
+.header-content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  padding: 0 2rem;
+  align-items: center;
+
+  .sidebar-toggle {
+    cursor: pointer;
+
+    &:active {
+      transform: scale(.9);
+    }
+  }
+}

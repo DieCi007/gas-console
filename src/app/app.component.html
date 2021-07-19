@@ -1,1 +1,7 @@
-<app-header></app-header>
+<g-nav #sidenav>
+  <ng-container sidenav>
+  </ng-container>
+  <ng-container content>
+    <app-header (toggleSidebar)="sidenav.toggle()"></app-header>
+  </ng-container>
+</g-nav>
