@@ -1,0 +1,15 @@
+<div class="container">
+  <g-card [containerStyle]="style">
+    <form [formGroup]="loginForm" class="form-container" (submit)="onSubmit()">
+      <g-input-field [form]="loginForm" controlName="username"
+                     label="Username">
+      </g-input-field>
+      <g-input-field type="password" [form]="loginForm"
+                     controlName="password" label="Password">
+      </g-input-field>
+      <div class="button-container">
+        <g-button type="submit" label="Login"></g-button>
+      </div>
+    </form>
+  </g-card>
+</div>

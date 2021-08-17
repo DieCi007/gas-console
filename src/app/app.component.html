@@ -1,7 +1,13 @@
-<g-nav #sidenav>
+<g-nav #sidenav sideBarSize="300px">
   <ng-container sidenav>
+    TODO
   </ng-container>
   <ng-container content>
-    <app-header (toggleSidebar)="sidenav.toggle()"></app-header>
+    <div class="page-container">
+      <app-header (toggleSidebar)="sidenav.toggle()"></app-header>
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
   </ng-container>
 </g-nav>
