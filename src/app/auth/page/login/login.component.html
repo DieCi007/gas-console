@@ -1,12 +1,13 @@
 <div class="container">
   <g-card [containerStyle]="style">
     <form [formGroup]="loginForm" class="form-container" (submit)="onSubmit()">
-      <g-input-field [form]="loginForm" controlName="username"
+      <g-input-field [form]="loginForm" controlName="username" [autofocus]="true" autocomplete="username"
                      label="Username">
       </g-input-field>
-      <g-input-field type="password" [form]="loginForm"
+      <g-input-field type="password" [form]="loginForm" autocomplete="current-password"
                      controlName="password" label="Password">
       </g-input-field>
+      <small *ngIf="hasLoginError" class="error-message">Username o password sbagliato</small>
       <div class="button-container">
         <g-button type="submit" label="Login"></g-button>
       </div>

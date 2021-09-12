@@ -1,41 +1,65 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { BreakpointService } from '../../../shared/service/breakpoint.service';
+import { Subscription } from 'rxjs';
+import { distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+    mobileStyle = {
+        height: '22rem',
+        width: '17rem'
+    };
+    defaultStyle = {
+        height: '25rem',
+        width: '30rem'
+    };
 
-  constructor(
-    private fb: FormBuilder
-  ) {
-  }
+    constructor(
+        private fb: FormBuilder,
+        private bpService: BreakpointService,
+        private authService: AuthService
+    ) {
+    }
 
-  loginForm = this.fb.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required],
-  });
+    mobileSubscription: Subscription;
 
-  style: { [klass: string]: any; } = {
-    height: '25rem',
-    width: '30rem',
-  };
+    loginForm = this.fb.group({
+        username: ['', Validators.required],
+        password: ['', Validators.required],
+    });
 
-  ngOnInit(): void {
-  }
+    style: { [klass: string]: any; } = this.defaultStyle;
+    hasLoginError = false;
 
-  get username(): AbstractControl {
-    return this.loginForm.get('username');
-  }
+    ngOnInit(): void {
+        this.mobileSubscription = this.bpService.mobile().pipe(
+            distinctUntilChanged(),
+            tap(bp => bp.matches ? this.style = this.mobileStyle :
+                this.style = this.defaultStyle)).subscribe();
+    }
 
-  get password(): AbstractControl {
-    return this.loginForm.get('password');
-  }
+    get username(): AbstractControl {
+        return this.loginForm.get('username');
+    }
+
+    get password(): AbstractControl {
+        return this.loginForm.get('password');
+    }
 
 
-  onSubmit(): void {
-    console.log(this.loginForm.value);
-  }
+    onSubmit(): void {
+        this.authService.login(this.loginForm.value).pipe(
+            switchMap(() => this.authService.getMe())
+        ).subscribe();
+    }
+
+    ngOnDestroy(): void {
+        this.mobileSubscription.unsubscribe();
+    }
 }
