@@ -1,6 +1,21 @@
 <g-nav #sidenav sideBarSize="300px">
   <ng-container sidenav>
-    TODO
+    <div class="sidenav" *ngIf="isLoggedIn">
+      <div class="user-info">
+        <i class="pi pi-user"></i>
+        <h2>{{username | titlecase}}</h2>
+      </div>
+      <div class="actions">
+        <ul>
+          <li>
+            <img src="assets/app/fuel.jpeg" alt="">
+            <span [routerLink]="'stations'"
+                  routerLinkActive="active">Stations</span>
+          </li>
+        </ul>
+        <p-divider></p-divider>
+      </div>
+    </div>
   </ng-container>
   <ng-container content>
     <div class="page-container">

@@ -1,5 +1,51 @@
 @import "./theme/variables";
 
+.sidenav {
+  height: 100%;
+  width: 100%;
+
+  .actions {
+    ul {
+      li {
+        list-style: none;
+        display: flex;
+        align-items: center;
+
+        img {
+          height: 1.5rem;
+          padding-right: .5rem;
+        }
+
+        span {
+          font-size: 1.5rem;
+          cursor: pointer;
+
+          &.active {
+            color: $primary-dark
+          }
+        }
+      }
+    }
+  }
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0 5rem 0;
+    color: $gray-input;
+
+    i {
+      font-size: 2rem;
+    }
+
+    h2 {
+      margin: 1rem 0;
+    }
+  }
+}
+
 .page-container {
   height: 100vh;
   width: 100vw;
@@ -9,6 +55,6 @@
   .content {
     flex: 1;
     width: 100%;
-    background-color: $body;
+    background: radial-gradient(circle at -19% 160%, rgba(0, 0, 0, 0.1882352941), $body 70%);
   }
 }

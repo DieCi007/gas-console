@@ -8,6 +8,7 @@ import { NavModule } from 'g-ui';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './auth/service/auth.interceptor';
 import { AuthGuard } from './auth/auth.guard';
+import { DividerModule } from 'primeng/divider';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AuthGuard } from './auth/auth.guard';
     AppRoutingModule,
     SharedModule,
     NavModule,
-    HttpClientModule
+    HttpClientModule,
+    DividerModule
   ],
   providers: [
     {

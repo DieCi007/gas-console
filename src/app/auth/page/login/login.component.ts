@@ -50,9 +50,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       tap(bp => bp.matches ? this.style = this.mobileStyle :
         this.style = this.defaultStyle)).subscribe();
     if (!!this.authStore.me || localStorage.getItem(LS_AUTH_TOKEN)) {
-      this.router.navigateByUrl(URL_STATIONS);
+      this.router.navigateByUrl(URL_STATIONS).then(() => this.hasResolvedLogin = true);
+    } else {
+      this.hasResolvedLogin = true;
     }
-    this.hasResolvedLogin = true;
   }
 
   get username(): AbstractControl {
