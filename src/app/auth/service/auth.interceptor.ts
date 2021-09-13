@@ -17,19 +17,22 @@ export class AuthInterceptor implements HttpInterceptor {
   ) {
   }
 
+  isRefreshing = false;
+
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = this.authService.getAccessToken();
     if (token) {
-      return next.handle(this.addTokenToRequest(request, token)).pipe(
-        catchError(this.retryOnTokenExpired(request, next)),
-        tap({
-          error: (err: HttpErrorResponse) => {
-            if (err.status === 401) {
-              this.logout();
+      return next.handle(this.addTokenToRequest(request, token))
+        .pipe(
+          catchError(this.retryOnTokenExpired(request, next)),
+          tap({
+            error: (err: HttpErrorResponse) => {
+              if (err.status === 401) {
+                this.logout();
+              }
             }
-          }
-        })
-      );
+          })
+        );
     }
     return next.handle(request);
   }
@@ -44,13 +47,18 @@ export class AuthInterceptor implements HttpInterceptor {
 
   retryOnTokenExpired(request: HttpRequest<unknown>, next: HttpHandler): (response: any) => Observable<any> {
     return response => {
-      const refreshToken = this.authService.getRefreshToken();
-      if (response.status === 401 && !refreshToken) {
-        throw response;
+      if (!this.isRefreshing) {
+        this.isRefreshing = true;
+        const refreshToken = this.authService.getRefreshToken();
+        if (response.status === 401 && !refreshToken || response.status !== 401) {
+          throw response;
+        }
+        return this.authService.refresh({token: refreshToken}).pipe(
+          mergeMap(res => next.handle(this.addTokenToRequest(request, res.authToken))),
+        );
+      } else {
+        return next.handle(request);
       }
-      return this.authService.refresh({token: refreshToken}).pipe(
-        mergeMap(res => next.handle(this.addTokenToRequest(request, res.authToken)))
-      );
     };
   }
 
