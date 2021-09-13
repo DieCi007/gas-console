@@ -7,7 +7,7 @@ import { IRefreshTokenRequest } from '../model/IRefreshTokenRequest';
 import { IRefreshTokenResponse } from '../model/IRefreshTokenResponse';
 import { map, tap } from 'rxjs/operators';
 import { AuthStoreService, IUserState } from './auth-store.service';
-import { HEADER_AUTH, HEADER_REFRESH, LS_AUTH_TOKEN, LS_REFRESH_TOKEN } from '../../shared/constants';
+import { HEADER_AUTH, HEADER_REFRESH, LS_AUTH_TOKEN, LS_REFRESH_TOKEN, URL_LOGIN } from '../../shared/constants';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -42,7 +42,9 @@ export class AuthService {
   }
 
   getMe(): Observable<IUserState> {
-    return this.http.get<IUserState>(environment.apiBaseUrl + 'me');
+    return this.http.get<IUserState>(environment.apiBaseUrl + 'me').pipe(
+      tap(me => this.authStore.setMe(me))
+    );
   }
 
   getAccessToken(): string {
@@ -56,6 +58,6 @@ export class AuthService {
   logout(): void {
     this.authStore.clearState();
     localStorage.clear();
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl(URL_LOGIN);
   }
 }

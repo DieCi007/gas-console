@@ -33,7 +33,7 @@ export class AuthStoreService extends Store<any> {
   }
 
   setMe(state: IUserState): void {
-    this.setState({...this.state, state});
+    this.setState({...this.state, user: state});
   }
 
   clearState(): void {

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="hasResolvedLogin">
   <g-card [containerStyle]="style">
     <form [formGroup]="loginForm" class="form-container" (submit)="onSubmit()">
       <g-input-field [form]="loginForm" controlName="username" [autofocus]="true" autocomplete="username"
@@ -9,7 +9,10 @@
       </g-input-field>
       <small *ngIf="hasLoginError" class="error-message">Username o password sbagliato</small>
       <div class="button-container">
-        <g-button type="submit" label="Login"></g-button>
+        <g-button width="10rem" *ngIf="!loading else loader" type="submit" label="Login"></g-button>
+        <ng-template #loader>
+          <g-spinner></g-spinner>
+        </ng-template>
       </div>
     </form>
   </g-card>
