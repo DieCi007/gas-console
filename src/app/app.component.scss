@@ -51,10 +51,19 @@
   width: 100vw;
   display: flex;
   flex-direction: column;
+  background: radial-gradient(circle at -19% 160%, rgba(0, 0, 0, 0.1882352941), $body 70%);
 
   .content {
     flex: 1;
-    width: 100%;
-    background: radial-gradient(circle at -19% 160%, rgba(0, 0, 0, 0.1882352941), $body 70%);
+    width: 85%;
+    align-self: center;
+  }
+}
+
+@media #{$smartphone} {
+  .page-container {
+    .content {
+      width: 95%;
+    }
   }
 }

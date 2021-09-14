@@ -1,1 +1,7 @@
-<p>station-list works!</p>
+<div class="page-container">
+  <div class="title">Distributori</div>
+  <app-table [headerData]="tableHeaderData" [data]="stations"></app-table>
+  <div class="spinner-container" *ngIf="isLoading">
+    <g-spinner></g-spinner>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+@import "../../theme/variables";
+
+.table-container {
+  &.card {
+    box-shadow: 0 2px 10px 0 $shadow-light;
+    border-radius: 20px;
+  }
+}

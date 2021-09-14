@@ -1,0 +1,27 @@
+@import "../../../theme/variables";
+
+.page-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  .title {
+    font-weight: 500;
+    font-size: 2rem;
+    letter-spacing: 1.5px;
+  }
+
+  .spinner-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+  }
+}
