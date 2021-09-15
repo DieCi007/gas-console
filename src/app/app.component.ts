@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { AuthStoreService } from './auth/service/auth-store.service';
 import { tap } from 'rxjs/operators';
+import { NavComponent } from '../../../gas-angular-ui/dist/g-ui';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +28,4 @@ export class AppComponent implements OnInit {
       })
     ).subscribe();
   }
-
-
 }

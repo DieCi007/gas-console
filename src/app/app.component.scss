@@ -54,7 +54,8 @@
   background: radial-gradient(circle at -19% 160%, rgba(0, 0, 0, 0.1882352941), $body 70%);
 
   .content {
-    flex: 1;
+    height: 100%;
+    max-height: 100%;
     width: 85%;
     align-self: center;
   }

@@ -1,6 +1,8 @@
 <div class="page-container">
   <div class="title">Distributori</div>
-  <app-table [headerData]="tableHeaderData" [data]="stations"></app-table>
+  <app-table [headerData]="tableHeaderData" [data]="stations"
+             [cardMode]="true"></app-table>
+  <div class="paginator">paginator</div>
   <div class="spinner-container" *ngIf="isLoading">
     <g-spinner></g-spinner>
   </div>

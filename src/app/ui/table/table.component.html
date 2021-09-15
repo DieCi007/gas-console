@@ -1,3 +1,26 @@
-<div class="table-container" [class.card]="cardMode">
-
+<div class="container" [class.card]="cardMode">
+  <div class="table-container" [ngStyle]="{height: mobileStyle ? maxHeightMobile : maxHeightPC}">
+    <table *ngIf="!mobileStyle else custom">
+      <thead>
+      <tr>
+        <th *ngFor="let data of headerData">{{data.name}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let element of data">
+        <td *ngFor="let hd of headerData">{{element[hd.property]}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <ng-template #custom>
+      <div *ngFor="let element of data; index as i" class="custom-table-row"
+           [class.odd-row]="i % 2 === 0">
+        <div *ngFor="let hd of headerData">
+          <span class="header-value">{{hd.name}}:</span>
+          <span class="spacer"></span>
+          <span class="body-value">{{element[hd.property]}}</span>
+        </div>
+      </div>
+    </ng-template>
+  </div>
 </div>

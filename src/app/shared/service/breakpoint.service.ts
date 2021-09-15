@@ -18,4 +18,8 @@ export class BreakpointService {
     return this.observer.observe([`(max-width: ${MOBILE_WIDTH}px)`]);
   }
 
+  customMaxWidth(pixels: number): Observable<BreakpointState> {
+    return this.observer.observe([`(max-width: ${pixels}px)`]);
+  }
+
 }

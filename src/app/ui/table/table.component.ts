@@ -1,4 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { BreakpointService } from '../../shared/service/breakpoint.service';
+import { Subscription } from 'rxjs';
+import { distinctUntilChanged, tap } from 'rxjs/operators';
 
 export interface ITableHeaderData {
   name: string;
@@ -11,17 +14,34 @@ export interface ITableHeaderData {
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent<T> implements OnInit {
+export class TableComponent<T> implements OnInit, OnDestroy {
 
   @Input() headerData: ITableHeaderData[];
   @Input() data: T[];
   @Input() noDataMessage = 'No items to display';
   @Input() cardMode = false;
-  constructor() {
+  @Input() maxHeightPC = '50rem';
+  @Input() maxHeightMobile = '38rem';
+  @Input() changeAtPx = 1200;
+  mobileStyle = false;
+  private bp$: Subscription;
+
+  constructor(
+    private bp: BreakpointService,
+  ) {
   }
 
 
   ngOnInit(): void {
+    this.bp.customMaxWidth(this.changeAtPx).pipe(
+      distinctUntilChanged(),
+      tap(bp => bp.matches ? this.mobileStyle = true :
+        this.mobileStyle = false),
+    ).subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.bp$.unsubscribe();
   }
 
 }
