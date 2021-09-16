@@ -17,6 +17,7 @@ export interface ITableHeaderData {
 export class TableComponent<T> implements OnInit, OnDestroy {
 
   @Input() headerData: ITableHeaderData[];
+  @Input() expandedHeaderData: ITableHeaderData[];
   @Input() data: T[];
   @Input() noDataMessage = 'No items to display';
   @Input() cardMode = false;
@@ -44,4 +45,11 @@ export class TableComponent<T> implements OnInit, OnDestroy {
     this.bp$.unsubscribe();
   }
 
+  activateAccordion(accordion: HTMLTableDataCellElement): void {
+    if (accordion.style.display === 'table-cell') {
+      accordion.style.display = 'none';
+    } else {
+      accordion.style.display = 'table-cell';
+    }
+  }
 }

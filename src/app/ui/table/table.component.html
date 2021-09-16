@@ -7,9 +7,20 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let element of data">
-        <td *ngFor="let hd of headerData">{{element[hd.property]}}</td>
-      </tr>
+      <ng-container *ngFor="let element of data">
+        <tr (click)="activateAccordion(accordion)">
+          <td *ngFor="let hd of headerData">{{element[hd.property]}}</td>
+        </tr>
+        <tr>
+          <td class="accordion-data" #accordion [colSpan]="headerData.length">
+            <div *ngFor="let ehd of expandedHeaderData">
+              <span class="header-value">{{ehd.name}}:</span>
+              <span class="spacer"></span>
+              <span class="body-value">{{element[ehd.property]}}</span>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
       </tbody>
     </table>
     <ng-template #custom>

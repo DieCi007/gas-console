@@ -16,15 +16,18 @@ const initialPageRequest: IPaginatedRequest = {
 
 const tableHeaderData: ITableHeaderData[] = [
   {name: 'ID', property: 'id', sortable: true},
-  {name: 'Di', property: 'owner', sortable: true},
   {name: 'Bandiera', property: 'flag', sortable: true},
   {name: 'Nome', property: 'name', sortable: true},
-  {name: 'Indirizzo', property: 'address', sortable: true},
   {name: 'Comune', property: 'municipality', sortable: true},
   {name: 'Provincia', property: 'province', sortable: true},
   {name: 'Latitudine', property: 'latitude', sortable: true},
   {name: 'Longitudine', property: 'longitude', sortable: true},
   {name: 'Tipo', property: 'type', sortable: true},
+];
+
+const expandedHeaderData: ITableHeaderData[] = [
+  {name: 'Di', property: 'owner', sortable: true},
+  {name: 'Indirizzo', property: 'address', sortable: true},
 ];
 
 @Component({
@@ -42,6 +45,7 @@ export class StationListComponent implements OnInit {
   paginatedRequest = initialPageRequest;
   paginatedRequest$ = new BehaviorSubject(this.paginatedRequest);
   tableHeaderData = tableHeaderData;
+  expandedHeaderData = expandedHeaderData;
   stations: IGasStationAnalyticsResponse[];
   isLoading = false;
   totalPages: number;
