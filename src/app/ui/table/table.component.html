@@ -2,14 +2,33 @@
   <div class="table-container" [ngStyle]="{height: mobileStyle ? maxHeightMobile : maxHeightPC}">
     <table *ngIf="!mobileStyle else custom">
       <thead>
-      <tr>
-        <th *ngFor="let data of headerData">{{data.name}}</th>
+      <tr [ngClass]="{primary: headerColor==='primary', secondary: headerColor==='secondary'}"
+          [ngStyle]="{backgroundColor:!['primary','secondary'].includes(headerColor) && headerColor}">
+        <th *ngFor="let data of headerData" (click)="onSortChange(data.property)">{{data.name}}
+          <i class="sort-element pi {{data.property === sort.field &&
+          sort && sort.type === 'ASC' ? 'pi-sort-up' : 'pi-sort-down'}}"
+             [class.active]="data.property === sort.field"></i></th>
+        <th *ngIf="buttonData.length>0">{{buttonHeaderName}}</th>
       </tr>
       </thead>
       <tbody>
       <ng-container *ngFor="let element of data">
-        <tr (click)="activateAccordion(accordion)">
-          <td *ngFor="let hd of headerData">{{element[hd.property]}}</td>
+        <tr [ngClass]="{primary: hoverColor==='primary', secondary: hoverColor==='secondary'}"
+            (click)="activateAccordion(accordion)">
+          <td *ngFor="let hd of headerData" [class.emphasized]="hd.isBold">{{element[hd.property]}}</td>
+          <td>
+            <ng-container *ngFor="let btn of buttonData">
+              <g-button [color]="btn.color==='primary'?'primary':'secondary'" *ngIf="btn.type === 'LABELED' else icon"
+                        [label]="btn.label" (click)="onButtonClick($event,btn.id)"
+                        [pTooltip]="btn.tooltip" [showDelay]="500" class="action"></g-button>
+              <ng-template #icon>
+                <i [ngClass]="{primary: btn.color==='primary', secondary: btn.color==='secondary',
+              danger: btn.color === 'danger'}"
+                   [ngStyle]="{color: !['primary','secondary','danger'].includes(btn.color) && btn.color}"
+                   class="action pi {{btn.icon}}" (click)="onButtonClick($event, btn.id)"
+                   [pTooltip]="btn.tooltip" [showDelay]="500"></i></ng-template>
+            </ng-container>
+          </td>
         </tr>
         <tr>
           <td class="accordion-data" #accordion [colSpan]="headerData.length">
@@ -23,13 +42,29 @@
       </ng-container>
       </tbody>
     </table>
+
     <ng-template #custom>
       <div *ngFor="let element of data; index as i" class="custom-table-row"
            [class.odd-row]="i % 2 === 0">
-        <div *ngFor="let hd of headerData">
+        <div *ngFor="let hd of allHeaderData">
           <span class="header-value">{{hd.name}}:</span>
           <span class="spacer"></span>
-          <span class="body-value">{{element[hd.property]}}</span>
+          <span class="body-value" [class.emphasized]="hd.isBold">{{element[hd.property]}}</span>
+        </div>
+        <div *ngIf="buttonData.length>0">
+          <span class="header-value">{{buttonHeaderName}}:</span>
+          <span class="spacer"></span>
+          <ng-container *ngFor="let btn of buttonData">
+            <g-button [color]="btn.color==='primary'?'primary':'secondary'" *ngIf="btn.type === 'LABELED' else icon"
+                      [label]="btn.label" (click)="onButtonClick($event,btn.id)"
+                      [pTooltip]="btn.tooltip" [showDelay]="500" class="action"></g-button>
+            <ng-template #icon>
+              <i [ngClass]="{primary: btn.color==='primary', secondary: btn.color==='secondary',
+              danger: btn.color === 'danger'}"
+                 [ngStyle]="{color: !['primary','secondary','danger'].includes(btn.color) && btn.color}"
+                 class="action pi {{btn.icon}}" (click)="onButtonClick($event, btn.id)"
+                 [pTooltip]="btn.tooltip" [showDelay]="500"></i></ng-template>
+          </ng-container>
         </div>
       </div>
     </ng-template>

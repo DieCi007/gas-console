@@ -1,0 +1,68 @@
+@import '../../theme/variables';
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  .page-status-container, .per-page-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 .4rem;
+
+    span {
+      margin-right: .3rem;
+    }
+  }
+
+  .pagination-info {
+    height: 2rem;
+    width: 2rem;
+    border: 1px solid $shadow-light;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $body;
+    margin: 0 .1rem;
+    box-shadow: 0 0 5px 1px $shadow-light;
+
+    i {
+      font-size: 1.3rem;
+    }
+
+    &.enabled {
+      cursor: pointer;
+    }
+
+    &.enabled:not(.selected):hover {
+      background-color: $primary-less-transparent;
+      transition: 300ms ease all;
+    }
+
+    &.enabled:not(.selected):hover:active {
+      background-color: $primary-transparent;
+      box-shadow: none;
+    }
+
+    &.disabled {
+      background-color: $disabled;
+      cursor: not-allowed;
+      color: $gray;
+    }
+
+    &.selected {
+      background-color: $primary;
+    }
+  }
+}
+
+@media #{$smartphone} {
+  .container {
+    .page-status-container, .page-status-container {
+      padding: .2rem 0;
+    }
+  }
+}

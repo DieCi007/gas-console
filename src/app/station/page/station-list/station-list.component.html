@@ -1,8 +1,13 @@
 <div class="page-container">
   <div class="title">Distributori</div>
-  <app-table [headerData]="tableHeaderData" [data]="stations"
-             [expandedHeaderData]="expandedHeaderData" [cardMode]="true"></app-table>
-  <div class="paginator">paginator</div>
+  <app-table [headerData]="tableHeaderData" [data]="stations" [buttonData]="buttonData"
+             [expandedHeaderData]="expandedHeaderData" [cardMode]="true"
+             (buttonClick)="onButtonClick($event)" buttonHeaderName="Azioni"
+             [sort]="sort" (sortChange)="onSortChange($event)"></app-table>
+  <div class="paginator">
+    <app-paginator [totalPages]="totalPages" [selectedSize]="currentSize"
+                   [selectedPage]="currentPage" (valueChange)="onPaginatorChange($event)"></app-paginator>
+  </div>
   <div class="spinner-container" *ngIf="isLoading">
     <g-spinner></g-spinner>
   </div>
