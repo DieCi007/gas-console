@@ -5,4 +5,5 @@ export interface IPaginatedRequest {
   size: number;
   sortBy: string;
   sortType: SortType;
+  query?: string;
 }

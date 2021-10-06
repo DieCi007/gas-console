@@ -2,9 +2,12 @@
   <div class="table-container" [ngStyle]="{height: mobileStyle ? maxHeightMobile : maxHeightPC}">
     <table *ngIf="!mobileStyle else custom">
       <thead>
-      <tr [ngClass]="{primary: headerColor==='primary', secondary: headerColor==='secondary'}"
+      <tr *ngIf="filterable" [ngClass]="{primary: headerColor==='primary', secondary: headerColor==='secondary'}"
           [ngStyle]="{backgroundColor:!['primary','secondary'].includes(headerColor) && headerColor}">
-
+        <td class="filter-container" [colSpan]="headerData?.length + 1">
+          <g-input-field font="normal" width="20rem"
+                     [form]="filterForm" controlName="filter" label="Cerca..."></g-input-field>
+        </td>
       </tr>
       <tr [ngClass]="{primary: headerColor==='primary', secondary: headerColor==='secondary'}"
           [ngStyle]="{backgroundColor:!['primary','secondary'].includes(headerColor) && headerColor}">
@@ -12,7 +15,7 @@
           <i class="sort-element pi {{data.property === sort.field &&
           sort && sort.type === 'ASC' ? 'pi-sort-up' : 'pi-sort-down'}}"
              [class.active]="data.property === sort.field"></i></th>
-        <th *ngIf="buttonData.length>0">{{buttonHeaderName}}</th>
+        <th>{{buttonData.length > 0 ? buttonHeaderName : ''}}</th>
       </tr>
       </thead>
       <tbody>

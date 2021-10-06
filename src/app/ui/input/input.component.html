@@ -1,0 +1,13 @@
+<label class="input-control" [style]="{width: width}"
+       [ngClass]="{'mod-error': control.invalid && (control.dirty || control.touched)}">
+  <input [ngClass]="{'active': !!control.value, 'normal': font==='normal'}"
+         [type]="type" [formControl]="control" [formGroup]="form"
+         [autofocus]="autofocus" [autocomplete]="autocomplete"/>
+  <span>{{label}}</span>
+  <label class="disabled-view" [ngClass]="{'normal': font==='normal'}">
+    {{control.value}}</label>
+  <label class="error-border"></label>
+  <ng-container *ngIf="control.invalid && (control.dirty || control.touched)">
+    <label class="error-label" *ngIf="control.errors?.required">Campo obbligatorio</label>
+  </ng-container>
+</label>

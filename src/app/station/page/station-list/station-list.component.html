@@ -1,7 +1,7 @@
 <div class="page-container">
   <div class="title">Distributori</div>
   <app-table [headerData]="tableHeaderData" [data]="stations" [buttonData]="buttonData"
-             [expandedHeaderData]="expandedHeaderData" [cardMode]="true"
+             [expandedHeaderData]="expandedHeaderData" [cardMode]="true" [filterable]="true" (filterChange)="onFilterChange($event)"
              (buttonClick)="onButtonClick($event)" buttonHeaderName="Azioni"
              [sort]="sort" (sortChange)="onSortChange($event)"></app-table>
   <div class="paginator">

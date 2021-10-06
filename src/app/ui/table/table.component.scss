@@ -44,6 +44,10 @@
             }
           }
 
+          td.filter-container {
+            padding: 0 1rem;
+          }
+
           &.primary {
             background-color: $primary;
           }
