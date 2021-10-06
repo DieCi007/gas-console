@@ -4,6 +4,10 @@
       <thead>
       <tr [ngClass]="{primary: headerColor==='primary', secondary: headerColor==='secondary'}"
           [ngStyle]="{backgroundColor:!['primary','secondary'].includes(headerColor) && headerColor}">
+
+      </tr>
+      <tr [ngClass]="{primary: headerColor==='primary', secondary: headerColor==='secondary'}"
+          [ngStyle]="{backgroundColor:!['primary','secondary'].includes(headerColor) && headerColor}">
         <th *ngFor="let data of headerData" (click)="onSortChange(data.property)">{{data.name}}
           <i class="sort-element pi {{data.property === sort.field &&
           sort && sort.type === 'ASC' ? 'pi-sort-up' : 'pi-sort-down'}}"
@@ -40,6 +44,12 @@
           </td>
         </tr>
       </ng-container>
+      <ng-container *ngIf="data?.length < 1">
+        <tr>
+          <td [colSpan]="headerData?.length + (buttonData?.length || 0)"
+              style="text-align: center">{{noDataMessage}}</td>
+        </tr>
+      </ng-container>
       </tbody>
     </table>
 
@@ -67,6 +77,9 @@
           </ng-container>
         </div>
       </div>
+      <ng-container *ngIf="data?.length < 1">
+        <div style="text-align: center">{{noDataMessage}}</div>
+      </ng-container>
     </ng-template>
   </div>
 </div>
