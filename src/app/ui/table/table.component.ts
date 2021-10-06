@@ -30,6 +30,11 @@ export interface ISortInfo {
   field: string;
 }
 
+export interface IButtonClickData<T> {
+  buttonId: string;
+  rowData: T;
+}
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -50,7 +55,7 @@ export class TableComponent<T> implements OnInit, OnDestroy {
   @Input() headerColor: 'primary' | 'secondary' | string = 'primary';
   @Input() hoverColor: 'primary' | 'secondary' = 'secondary';
   @Input() sort: ISortInfo;
-  @Output() buttonClick = new EventEmitter<string>();
+  @Output() buttonClick = new EventEmitter<IButtonClickData<T>>();
   @Output() sortChange = new EventEmitter<ISortInfo>();
 
   mobileStyle = false;
@@ -63,7 +68,7 @@ export class TableComponent<T> implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.bp.customMaxWidth(this.changeAtPx).pipe(
+    this.bp$ = this.bp.customMaxWidth(this.changeAtPx).pipe(
       distinctUntilChanged(),
       tap(bp => bp.matches ? this.mobileStyle = true :
         this.mobileStyle = false),
@@ -86,10 +91,13 @@ export class TableComponent<T> implements OnInit, OnDestroy {
     return [...this.headerData, ...this.expandedHeaderData];
   }
 
-  onButtonClick(event: MouseEvent, id: string): void {
+  onButtonClick(event: MouseEvent, id: string, el: T): void {
     event.preventDefault();
     event.stopPropagation();
-    this.buttonClick.emit(id);
+    this.buttonClick.emit({
+      buttonId: id,
+      rowData: el
+    });
   }
 
   onSortChange(property: string): void {

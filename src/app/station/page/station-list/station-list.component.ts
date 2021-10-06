@@ -5,8 +5,10 @@ import { IGasStationAnalyticsResponse } from '../../model/IGasStationAnalyticsRe
 import { IPaginatedRequest } from '../../../shared/model/IPaginatedRequest';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
-import { ISortInfo, ITableButtonData, ITableHeaderData, TableButtonType } from '../../../ui/table/table.component';
+import { IButtonClickData, ISortInfo, ITableButtonData, ITableHeaderData, TableButtonType } from '../../../ui/table/table.component';
 import { IPageStatus } from '../../../ui/paginator/paginator.component';
+import { ModalService, ModalSize } from '../../../ui/modal.service';
+import { EditStationComponent } from '../../components/edit-station/edit-station.component';
 
 const initialPageRequest: IPaginatedRequest = {
   sortType: SortType.ASC,
@@ -50,7 +52,8 @@ const buttonData: ITableButtonData[] = [
 export class StationListComponent implements OnInit {
 
   constructor(
-    private service: GasStationService
+    private service: GasStationService,
+    private modalService: ModalService
   ) {
   }
 
@@ -83,13 +86,18 @@ export class StationListComponent implements OnInit {
       }),
       catchError(err => {
         this.isLoading = false;
+        this.modalService.handleError(err.error);
         return throwError(err);
       }),
     ).subscribe(() => this.isLoading = false);
   }
 
-  onButtonClick(id: string): void {
-    console.log(id);
+  onButtonClick(event: IButtonClickData<IGasStationAnalyticsResponse>): void {
+    if (event.buttonId === 'delete') {
+      this.deleteElement(event.rowData);
+    } else if (event.buttonId === 'edit') {
+      this.editElement(event.rowData);
+    }
   }
 
   onPaginatorChange(status: IPageStatus): void {
@@ -108,5 +116,29 @@ export class StationListComponent implements OnInit {
       sortBy: event.field, sortType: event.type
     };
     this.paginatedRequest$.next(this.paginatedRequest);
+  }
+
+  deleteElement(rowData: IGasStationAnalyticsResponse): void {
+    const actions = this.modalService.openDefaultModal({
+      title: 'Attenzione',
+      primaryText: `Stai per cancellare il distributore con ID: ${rowData.id}.`,
+      secondaryText: 'Sei sicuro di voler continuare?',
+      actions: [
+        {
+          buttonLabel: 'Indietro',
+          buttonColor: 'secondary'
+        },
+        {
+          buttonColor: 'danger',
+          buttonLabel: 'Conferma'
+        },
+      ]
+    });
+    actions[1].click.subscribe(() => console.log('captured'));
+  }
+
+  editElement(rowData: IGasStationAnalyticsResponse): void {
+    const ref = this.modalService.createFromComponent(EditStationComponent, {station: rowData},
+      null);
   }
 }

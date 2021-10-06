@@ -20,7 +20,7 @@
   <ng-container content>
     <div class="page-container">
       <app-header (toggleSidebar)="sidenav.toggle()"></app-header>
-      <div class="content">
+      <div class="content" portalHost>
         <router-outlet></router-outlet>
       </div>
     </div>

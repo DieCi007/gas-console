@@ -1,0 +1,12 @@
+<div class="container" [@fadeInOnEnter]>
+  <div class="title">{{title}}</div>
+  <div class="body">
+    <div class="primary-text" *ngIf="primaryText">{{primaryText}}</div>
+    <div class="secondary-text" *ngIf="secondaryText">{{secondaryText}}</div>
+    <div class="html-content" *ngIf="htmlContent" [innerHTML]="htmlContent | trustHtml"></div>
+  </div>
+  <div class="button-container">
+    <g-button *ngFor="let action of actions" [color]="action.buttonColor"
+              [label]="action.buttonLabel" (clicked)="emitAction(action)"></g-button>
+  </div>
+</div>

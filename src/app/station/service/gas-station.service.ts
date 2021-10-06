@@ -5,6 +5,7 @@ import { IPaginatedResponse } from '../../shared/model/IPaginatedResponse';
 import { IGasStationAnalyticsResponse } from '../model/IGasStationAnalyticsResponse';
 import { IPaginatedRequest } from '../../shared/model/IPaginatedRequest';
 import { environment } from '../../../environments/environment';
+import { IGasStation } from '../model/IGasStation';
 
 const STATION_CONTROLLER_PATH = 'gas/station';
 
@@ -30,4 +31,5 @@ export class GasStationService {
     return this.http.get<IPaginatedResponse<IGasStationAnalyticsResponse>>
     (environment.apiBaseUrl + STATION_CONTROLLER_PATH + '/analytics', {params});
   }
+
 }

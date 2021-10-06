@@ -9,6 +9,10 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './auth/service/auth.interceptor';
 import { AuthGuard } from './auth/auth.guard';
 import { DividerModule } from 'primeng/divider';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { PortalModule } from '@angular/cdk/portal';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,11 +20,15 @@ import { DividerModule } from 'primeng/divider';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
     NavModule,
     HttpClientModule,
-    DividerModule
+    DividerModule,
+    OverlayModule,
+    PortalModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

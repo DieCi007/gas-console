@@ -19,13 +19,13 @@
           <td>
             <ng-container *ngFor="let btn of buttonData">
               <g-button [color]="btn.color==='primary'?'primary':'secondary'" *ngIf="btn.type === 'LABELED' else icon"
-                        [label]="btn.label" (click)="onButtonClick($event,btn.id)"
+                        [label]="btn.label" (click)="onButtonClick($event, btn.id, element)"
                         [pTooltip]="btn.tooltip" [showDelay]="500" class="action"></g-button>
               <ng-template #icon>
                 <i [ngClass]="{primary: btn.color==='primary', secondary: btn.color==='secondary',
               danger: btn.color === 'danger'}"
                    [ngStyle]="{color: !['primary','secondary','danger'].includes(btn.color) && btn.color}"
-                   class="action pi {{btn.icon}}" (click)="onButtonClick($event, btn.id)"
+                   class="action pi {{btn.icon}}" (click)="onButtonClick($event, btn.id, element)"
                    [pTooltip]="btn.tooltip" [showDelay]="500"></i></ng-template>
             </ng-container>
           </td>
@@ -56,13 +56,13 @@
           <span class="spacer"></span>
           <ng-container *ngFor="let btn of buttonData">
             <g-button [color]="btn.color==='primary'?'primary':'secondary'" *ngIf="btn.type === 'LABELED' else icon"
-                      [label]="btn.label" (click)="onButtonClick($event,btn.id)"
+                      [label]="btn.label" (click)="onButtonClick($event, btn.id, element)"
                       [pTooltip]="btn.tooltip" [showDelay]="500" class="action"></g-button>
             <ng-template #icon>
               <i [ngClass]="{primary: btn.color==='primary', secondary: btn.color==='secondary',
               danger: btn.color === 'danger'}"
                  [ngStyle]="{color: !['primary','secondary','danger'].includes(btn.color) && btn.color}"
-                 class="action pi {{btn.icon}}" (click)="onButtonClick($event, btn.id)"
+                 class="action pi {{btn.icon}}" (click)="onButtonClick($event, btn.id, element)"
                  [pTooltip]="btn.tooltip" [showDelay]="500"></i></ng-template>
           </ng-container>
         </div>

@@ -1,0 +1,19 @@
+@import "../../../theme/variables";
+
+:host {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  background-color: $body;
+  padding: 1rem;
+  border-radius: 10px;
+  max-width: 50rem;
+
+  .station-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
