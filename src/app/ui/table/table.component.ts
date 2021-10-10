@@ -99,15 +99,21 @@ export class TableComponent<T> implements OnInit, OnDestroy {
   }
 
   activateAccordion(accordion: HTMLTableDataCellElement): void {
-    if (accordion.style.display === 'table-cell') {
-      accordion.style.display = 'none';
-    } else {
-      accordion.style.display = 'table-cell';
+    if (this.expandedHeaderData?.length > 0) {
+      if (accordion.style.display === 'table-cell') {
+        accordion.style.display = 'none';
+      } else {
+        accordion.style.display = 'table-cell';
+      }
     }
   }
 
   get allHeaderData(): ITableHeaderData[] {
-    return [...this.headerData, ...this.expandedHeaderData];
+    let data = [...this.headerData];
+    if (this.expandedHeaderData) {
+      data = [...data, ...this.expandedHeaderData];
+    }
+    return data;
   }
 
   onButtonClick(event: MouseEvent, id: string, el: T): void {

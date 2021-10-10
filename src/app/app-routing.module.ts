@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {path: 'auth', loadChildren: () => import('./auth/auth.module').then(mod => mod.AuthModule)},
   {path: 'stations', loadChildren: () => import('./station/station.module').then(mod => mod.StationModule)},
+  {path: 'prices', loadChildren: () => import('./price/price.module').then(mod => mod.PriceModule)},
   {path: '**', redirectTo: 'stations', pathMatch: 'full'}
 ];
 
@@ -11,4 +12,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

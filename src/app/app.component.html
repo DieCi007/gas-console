@@ -10,7 +10,12 @@
           <li>
             <img src="assets/app/fuel.jpeg" alt="">
             <span [routerLink]="'stations'" (click)="sidenav.toggle()"
-                  routerLinkActive="active">Stations</span>
+                  routerLinkActive="active">Distributori</span>
+          </li>
+          <li>
+            <i class="pi pi-euro"></i>
+            <span [routerLink]="'prices'" (click)="sidenav.toggle()"
+                  routerLinkActive="active">Prezzi</span>
           </li>
         </ul>
         <p-divider></p-divider>

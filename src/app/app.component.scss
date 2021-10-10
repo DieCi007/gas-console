@@ -10,9 +10,11 @@
         list-style: none;
         display: flex;
         align-items: center;
+        padding: .5rem 0;
 
-        img {
+        img, i {
           height: 1.5rem;
+          font-size: 1.4rem;
           padding-right: .5rem;
         }
 

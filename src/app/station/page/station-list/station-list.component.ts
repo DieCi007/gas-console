@@ -132,4 +132,8 @@ export class StationListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._stationsUpdated.unsubscribe();
   }
+
+  calcMaxHeight(): string {
+    return window.innerHeight - 200 + 'px';
+  }
 }

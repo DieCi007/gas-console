@@ -1,4 +1,6 @@
-@import "../../../theme/variables";
+:host {
+  height: 100%;
+}
 
 .page-container {
   max-height: 100%;
@@ -10,17 +12,6 @@
   position: relative;
   justify-content: space-between;
 
-  .title {
-    font-weight: 500;
-    font-size: 2rem;
-    letter-spacing: 1.5px;
-  }
-
-  .paginator {
-    justify-self: flex-end;
-    padding-bottom: .5rem;
-  }
-
   .spinner-container {
     position: absolute;
     top: 0;
@@ -31,4 +22,17 @@
     align-items: center;
     justify-content: center;
   }
+
+  .title {
+    font-weight: 500;
+    font-size: 2rem;
+    letter-spacing: 1.5px;
+  }
+
+
+  .paginator {
+    justify-self: flex-end;
+    padding-bottom: .5rem;
+  }
+
 }

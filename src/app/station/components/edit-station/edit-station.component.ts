@@ -103,7 +103,7 @@ export class EditStationComponent implements OnInit {
       catchError(err => {
         this.loading = false;
         this.overlayRef.dispose();
-        this.modalService.handleError(err);
+        this.modalService.handleError(err.error);
         return throwError(err);
       })
     ).subscribe();

@@ -15,7 +15,7 @@
           <i class="sort-element pi {{data.property === sort.field &&
           sort && sort.type === 'ASC' ? 'pi-sort-up' : 'pi-sort-down'}}"
              [class.active]="data.property === sort.field"></i></th>
-        <th>{{buttonData.length > 0 ? buttonHeaderName : ''}}</th>
+        <th>{{buttonData?.length > 0 ? buttonHeaderName : ''}}</th>
       </tr>
       </thead>
       <tbody>
@@ -38,7 +38,7 @@
           </td>
         </tr>
         <tr>
-          <td class="accordion-data" #accordion [colSpan]="headerData.length">
+          <td class="accordion-data" #accordion [colSpan]="headerData?.length">
             <div *ngFor="let ehd of expandedHeaderData">
               <span class="header-value">{{ehd.name}}:</span>
               <span class="spacer"></span>
@@ -71,7 +71,7 @@
             <span class="spacer"></span>
             <span class="body-value" [class.emphasized]="hd.isBold">{{element[hd.property]}}</span>
           </div>
-          <div *ngIf="buttonData.length>0">
+          <div *ngIf="buttonData?.length>0">
             <span class="header-value">{{buttonHeaderName}}:</span>
             <span class="spacer"></span>
             <ng-container *ngFor="let btn of buttonData">
