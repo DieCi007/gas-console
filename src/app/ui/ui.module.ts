@@ -9,14 +9,16 @@ import { TrustHtmlPipe } from './trust-html.pipe';
 import { InputComponent } from './input/input.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputFieldModule } from 'g-ui';
+import { SwitchInputComponent } from './switch-input/switch-input.component';
 
 
 @NgModule({
-    declarations: [TableComponent, PaginatorComponent, DefaultModalComponent, TrustHtmlPipe, InputComponent],
-  exports: [
-    TableComponent,
-    PaginatorComponent
-  ],
+    declarations: [TableComponent, PaginatorComponent, DefaultModalComponent, TrustHtmlPipe, InputComponent, SwitchInputComponent],
+    exports: [
+        TableComponent,
+        PaginatorComponent,
+        SwitchInputComponent
+    ],
   imports: [
     CommonModule,
     ButtonModule,

@@ -1,25 +1,33 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { IModalInjectionData, MODAL_DATA } from '../../../ui/modal.service';
+import { IModalInjectionData, MODAL_DATA, ModalService } from '../../../ui/modal.service';
 import { OverlayRef } from '@angular/cdk/overlay';
 import { GasStationService } from '../../service/gas-station.service';
-import { IGasStationAnalyticsResponse } from '../../model/IGasStationAnalyticsResponse';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { GasStationStatus, IGasStationAnalyticsResponse } from '../../model/IGasStationAnalyticsResponse';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { fadeInOnEnterAnimation } from 'angular-animations';
+import { catchError, finalize } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-edit-station',
   templateUrl: './edit-station.component.html',
-  styleUrls: ['./edit-station.component.scss']
+  styleUrls: ['./edit-station.component.scss'],
+  animations: [
+    fadeInOnEnterAnimation({duration: 300}),
+  ]
 })
 export class EditStationComponent implements OnInit {
 
   overlayRef: OverlayRef;
   station: IGasStationAnalyticsResponse;
   stationForm: FormGroup;
+  loading = false;
 
   constructor(
     @Inject(MODAL_DATA) public data: IModalInjectionData,
     private fb: FormBuilder,
-    private service: GasStationService
+    private service: GasStationService,
+    private modalService: ModalService
   ) {
     this.station = data?.station;
     this.overlayRef = data?.overlayRef;
@@ -37,6 +45,7 @@ export class EditStationComponent implements OnInit {
       province: [this.station?.province, [Validators.required]],
       latitude: [this.station?.latitude, [Validators.required]],
       longitude: [this.station?.longitude, [Validators.required]],
+      status: [this.station?.status === GasStationStatus.SI],
     });
   }
 
@@ -76,4 +85,31 @@ export class EditStationComponent implements OnInit {
     return this.stationForm.get('longitude');
   }
 
+  get status(): AbstractControl {
+    return this.stationForm.get('status');
+  }
+
+  onSubmit(): void {
+    this.loading = true;
+    this.service.updateStation({
+      ...this.stationForm.value,
+      status: this.stationForm.value.status ? GasStationStatus.ACTIVE : GasStationStatus.INACTIVE
+    }).pipe(
+      finalize(() => {
+        this.loading = false;
+        this.overlayRef.dispose();
+        this.service.stationsUpdatedSubject.next();
+      }),
+      catchError(err => {
+        this.loading = false;
+        this.overlayRef.dispose();
+        this.modalService.handleError(err);
+        return throwError(err);
+      })
+    ).subscribe();
+  }
+
+  onBackClick(): void {
+    this.overlayRef.dispose();
+  }
 }

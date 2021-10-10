@@ -1,0 +1,75 @@
+@import "../../theme/variables";
+
+div {
+  display: flex;
+  flex-direction: column;
+
+  label.label {
+    padding-left: .2rem;
+    padding-bottom: .1rem;
+    text-transform: uppercase;
+  }
+
+  label.container {
+    cursor: pointer;
+    position: relative;
+    width: 4.5rem;
+    height: 2rem;
+    display: inline-block;
+    overflow: hidden;
+    border-radius: 20px;
+
+
+    input {
+      position: absolute;
+      transform: scale(0);
+
+      &:checked ~ .switch {
+        background: $primary;
+
+        &::before {
+          transform: translateX(-2.5rem);
+        }
+
+        &::after {
+          transform: translateX(0);
+        }
+      }
+      &:disabled ~ .switch {
+        background: $gray-light;
+      }
+    }
+
+    .switch {
+      display: block;
+      width: 4.5rem;
+      height: 2rem;
+      border-radius: 20px;
+      background: $gray;
+      transition: all 0.35s;
+
+      &::before {
+        background: $gray-light;
+        left: .2rem;
+      }
+
+      &::after {
+        right: .2rem;
+        background: $secondary;
+        transform: translateX(2.5rem);
+      }
+    }
+
+    .switch::before, .switch::after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 1.6rem;
+      height: 1.6rem;
+      top: .19rem;
+      border-radius: 50%;
+      transition: all 0.35s;
+    }
+
+  }
+}

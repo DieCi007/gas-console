@@ -3,7 +3,6 @@ import { ComponentType, GlobalPositionStrategy, Overlay, OverlayRef } from '@ang
 import { tap } from 'rxjs/operators';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { DefaultModalComponent } from './default-modal/default-modal.component';
-import { BreakpointService } from '../shared/service/breakpoint.service';
 
 export interface IModalRef<T> {
   overlayRef: OverlayRef;
@@ -67,7 +66,7 @@ export const MODAL_DATA = new InjectionToken('MODAL_DATA');
 export class ModalService {
   private overlayReference: OverlayRef[] = [];
 
-  constructor(private overlay: Overlay, private bp: BreakpointService) {
+  constructor(private overlay: Overlay) {
   }
 
   createFromComponent<T>(component: ComponentType<T>, props: IModalData, onBackdropClick?: () => void,

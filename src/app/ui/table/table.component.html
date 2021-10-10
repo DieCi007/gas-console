@@ -6,7 +6,7 @@
           [ngStyle]="{backgroundColor:!['primary','secondary'].includes(headerColor) && headerColor}">
         <td class="filter-container" [colSpan]="headerData?.length + 1">
           <g-input-field font="normal" width="20rem"
-                     [form]="filterForm" controlName="filter" label="Cerca..."></g-input-field>
+                         [form]="filterForm" controlName="filter" label="Cerca..."></g-input-field>
         </td>
       </tr>
       <tr [ngClass]="{primary: headerColor==='primary', secondary: headerColor==='secondary'}"
@@ -57,27 +57,35 @@
     </table>
 
     <ng-template #custom>
-      <div *ngFor="let element of data; index as i" class="custom-table-row"
-           [class.odd-row]="i % 2 === 0">
-        <div *ngFor="let hd of allHeaderData">
-          <span class="header-value">{{hd.name}}:</span>
-          <span class="spacer"></span>
-          <span class="body-value" [class.emphasized]="hd.isBold">{{element[hd.property]}}</span>
-        </div>
-        <div *ngIf="buttonData.length>0">
-          <span class="header-value">{{buttonHeaderName}}:</span>
-          <span class="spacer"></span>
-          <ng-container *ngFor="let btn of buttonData">
-            <g-button [color]="btn.color==='primary'?'primary':'secondary'" *ngIf="btn.type === 'LABELED' else icon"
-                      [label]="btn.label" (click)="onButtonClick($event, btn.id, element)"
-                      [pTooltip]="btn.tooltip" [showDelay]="500" class="action"></g-button>
-            <ng-template #icon>
-              <i [ngClass]="{primary: btn.color==='primary', secondary: btn.color==='secondary',
+      <div class="custom-table-filter"
+           [ngClass]="{primary: headerColor==='primary', secondary: headerColor==='secondary'}"
+           [ngStyle]="{backgroundColor:!['primary','secondary'].includes(headerColor) && headerColor}">
+        <g-input-field font="large" width="20rem"
+                       [form]="filterForm" controlName="filter" label="Cerca..."></g-input-field>
+      </div>
+      <div class="custom-table">
+        <div *ngFor="let element of data; index as i" class="custom-table-row"
+             [class.odd-row]="i % 2 === 0">
+          <div *ngFor="let hd of allHeaderData">
+            <span class="header-value">{{hd.name}}:</span>
+            <span class="spacer"></span>
+            <span class="body-value" [class.emphasized]="hd.isBold">{{element[hd.property]}}</span>
+          </div>
+          <div *ngIf="buttonData.length>0">
+            <span class="header-value">{{buttonHeaderName}}:</span>
+            <span class="spacer"></span>
+            <ng-container *ngFor="let btn of buttonData">
+              <g-button [color]="btn.color==='primary'?'primary':'secondary'" *ngIf="btn.type === 'LABELED' else icon"
+                        [label]="btn.label" (click)="onButtonClick($event, btn.id, element)"
+                        [pTooltip]="btn.tooltip" [showDelay]="500" class="action"></g-button>
+              <ng-template #icon>
+                <i [ngClass]="{primary: btn.color==='primary', secondary: btn.color==='secondary',
               danger: btn.color === 'danger'}"
-                 [ngStyle]="{color: !['primary','secondary','danger'].includes(btn.color) && btn.color}"
-                 class="action pi {{btn.icon}}" (click)="onButtonClick($event, btn.id, element)"
-                 [pTooltip]="btn.tooltip" [showDelay]="500"></i></ng-template>
-          </ng-container>
+                   [ngStyle]="{color: !['primary','secondary','danger'].includes(btn.color) && btn.color}"
+                   class="action pi {{btn.icon}}" (click)="onButtonClick($event, btn.id, element)"
+                   [pTooltip]="btn.tooltip" [showDelay]="500"></i></ng-template>
+            </ng-container>
+          </div>
         </div>
       </div>
       <ng-container *ngIf="data?.length < 1">

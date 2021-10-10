@@ -17,6 +17,8 @@
 
   .table-container {
     overflow: auto;
+    display: flex;
+    flex-direction: column;
 
     table {
       border-collapse: collapse;
@@ -125,49 +127,66 @@
       }
     }
 
-    .custom-table-row {
-      padding: .5rem .5rem;
+    .custom-table-filter {
+      width: 100%;
 
-      &.odd-row {
-        background-color: $primary-transparent;
+      &.primary {
+        background-color: $primary;
       }
 
-      .header-value {
-        font-size: 1.2rem;
-        font-weight: bold;
-      }
-
-      .spacer {
-        padding-left: 1rem;
-      }
-
-      .body-value {
-        font-size: 1.1rem;
-
-        &.emphasized {
-          font-weight: 500;
-        }
-      }
-
-      .action {
-        margin: 0 .3rem;
-      }
-
-      i {
-        &.primary {
-          color: $primary;
-        }
-
-        &.secondary {
-          color: $secondary;
-        }
-
-        &.danger {
-          color: $danger;
-        }
+      &.secondary {
+        background-color: $secondary;
       }
     }
 
+    .custom-table {
+      flex: 1;
+      overflow: auto;
+
+      .custom-table-row {
+        padding: .5rem .5rem;
+
+        &.odd-row {
+          background-color: $primary-transparent;
+        }
+
+        .header-value {
+          font-size: 1.2rem;
+          font-weight: bold;
+        }
+
+        .spacer {
+          padding-left: 1rem;
+        }
+
+        .body-value {
+          font-size: 1.1rem;
+
+          &.emphasized {
+            font-weight: 500;
+          }
+        }
+
+        .action {
+          margin: 0 .3rem;
+        }
+
+        i {
+          &.primary {
+            color: $primary;
+          }
+
+          &.secondary {
+            color: $secondary;
+          }
+
+          &.danger {
+            color: $danger;
+          }
+        }
+      }
+
+    }
   }
 }
 

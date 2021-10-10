@@ -9,4 +9,12 @@ export interface IGasStationAnalyticsResponse {
   province: string;
   latitude: number;
   longitude: number;
+  status: GasStationStatus;
+}
+
+export enum GasStationStatus {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
+  SI = 'Si',
+  NO = 'No'
 }

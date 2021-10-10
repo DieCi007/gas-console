@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { IPaginatedResponse } from '../../shared/model/IPaginatedResponse';
 import { IGasStationAnalyticsResponse } from '../model/IGasStationAnalyticsResponse';
 import { IPaginatedRequest } from '../../shared/model/IPaginatedRequest';
 import { environment } from '../../../environments/environment';
-import { IGasStation } from '../model/IGasStation';
 
 const STATION_CONTROLLER_PATH = 'gas/station';
 
@@ -13,6 +12,8 @@ const STATION_CONTROLLER_PATH = 'gas/station';
   providedIn: 'root'
 })
 export class GasStationService {
+  stationsUpdatedSubject = new Subject<void>();
+  stationsUpdated$ = this.stationsUpdatedSubject.asObservable();
 
   constructor(
     private http: HttpClient
@@ -30,6 +31,10 @@ export class GasStationService {
 
     return this.http.get<IPaginatedResponse<IGasStationAnalyticsResponse>>
     (environment.apiBaseUrl + STATION_CONTROLLER_PATH + '/analytics', {params});
+  }
+
+  updateStation(station: IGasStationAnalyticsResponse): Observable<IGasStationAnalyticsResponse> {
+    return this.http.patch<IGasStationAnalyticsResponse>(environment.apiBaseUrl + STATION_CONTROLLER_PATH, station);
   }
 
 }
