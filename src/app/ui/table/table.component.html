@@ -22,7 +22,14 @@
       <ng-container *ngFor="let element of data">
         <tr [ngClass]="{primary: hoverColor==='primary', secondary: hoverColor==='secondary'}"
             (click)="activateAccordion(accordion)">
-          <td *ngFor="let hd of headerData" [class.emphasized]="hd.isBold">{{element[hd.property]}}</td>
+          <ng-container *ngFor="let hd of headerData">
+            <td *ngIf="!hd.render else render" [class.emphasized]="hd.isBold">
+              {{hd.dateFormat ? (element[hd.property] | date: hd.dateFormat) : element[hd.property]}}
+            </td>
+            <ng-template #render>
+              <td [class.emphasized]="hd.isBold" [innerHTML]="hd.render(element) | trustHtml"></td>
+            </ng-template>
+          </ng-container>
           <td>
             <ng-container *ngFor="let btn of buttonData">
               <g-button [color]="btn.color==='primary'?'primary':'secondary'" *ngIf="btn.type === 'LABELED' else icon"
@@ -42,7 +49,8 @@
             <div *ngFor="let ehd of expandedHeaderData">
               <span class="header-value">{{ehd.name}}:</span>
               <span class="spacer"></span>
-              <span class="body-value">{{element[ehd.property]}}</span>
+              <span
+                class="body-value">{{ehd.dateFormat ? (element[ehd.property] | date: ehd.dateFormat) : element[ehd.property]}}</span>
             </div>
           </td>
         </tr>
@@ -69,7 +77,8 @@
           <div *ngFor="let hd of allHeaderData">
             <span class="header-value">{{hd.name}}:</span>
             <span class="spacer"></span>
-            <span class="body-value" [class.emphasized]="hd.isBold">{{element[hd.property]}}</span>
+            <span class="body-value"
+                  [class.emphasized]="hd.isBold">{{hd.dateFormat ? (element[hd.property] | date: hd.dateFormat) : element[hd.property]}}</span>
           </div>
           <div *ngIf="buttonData?.length>0">
             <span class="header-value">{{buttonHeaderName}}:</span>

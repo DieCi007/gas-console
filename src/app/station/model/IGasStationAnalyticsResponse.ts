@@ -14,7 +14,5 @@ export interface IGasStationAnalyticsResponse {
 
 export enum GasStationStatus {
   ACTIVE = 'ACTIVE',
-  INACTIVE = 'INACTIVE',
-  SI = 'Si',
-  NO = 'No'
+  INACTIVE = 'INACTIVE'
 }

@@ -10,6 +10,8 @@ export interface ITableHeaderData {
   sortable: boolean;
   property: string;
   isBold?: boolean;
+  dateFormat?: string;
+  render?: (row) => string;
 }
 
 export interface ITableButtonData {

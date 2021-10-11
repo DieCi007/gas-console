@@ -45,7 +45,7 @@ export class EditStationComponent implements OnInit {
       province: [this.station?.province, [Validators.required]],
       latitude: [this.station?.latitude, [Validators.required]],
       longitude: [this.station?.longitude, [Validators.required]],
-      status: [this.station?.status === GasStationStatus.SI],
+      status: [this.station?.status === GasStationStatus.ACTIVE],
     });
   }
 

@@ -25,7 +25,14 @@ const tableHeaderData: ITableHeaderData[] = [
   {name: 'Provincia', property: 'province', sortable: true},
   {name: 'Latitudine', property: 'latitude', sortable: true},
   {name: 'Longitudine', property: 'longitude', sortable: true},
-  {name: 'Attivo', property: 'status', sortable: true},
+  {
+    name: 'Attivo', property: 'status', sortable: true, render: row => {
+      const isActive = row.status === GasStationStatus.ACTIVE;
+      const color = isActive ? '#43a047' : '#d0021b';
+      const icon = isActive ? 'pi pi-check' : 'pi pi-times';
+      return `<i class="${icon}" style="color: ${color}"></i>`;
+    }
+  },
 ];
 
 const expandedHeaderData: ITableHeaderData[] = [
@@ -76,10 +83,7 @@ export class StationListComponent implements OnInit, OnDestroy {
       tap(() => this.isLoading = true),
       switchMap(res => this.service.getStations(res)),
       tap(res => {
-        this.stations = res.values.map(v => ({
-          ...v,
-          status: v.status === GasStationStatus.ACTIVE ? GasStationStatus.SI : GasStationStatus.NO
-        }));
+        this.stations = res.values;
         this.totalElements = res.totalElements;
         this.totalPages = res.totalPages;
         this.currentPage = res.currentPage;

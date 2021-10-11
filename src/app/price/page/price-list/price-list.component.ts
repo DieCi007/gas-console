@@ -18,8 +18,15 @@ const initialPageRequest: IPaginatedRequest = {
 
 const tableHeaderData: ITableHeaderData[] = [
   {name: 'ID Distributore', property: 'stationId', isBold: true, sortable: true},
-  {name: 'Data Aggiornamento', property: 'readDate', sortable: true},
-  {name: 'Self Service', property: 'isSelf', sortable: true},
+  {name: 'Data Aggiornamento', property: 'readDate', sortable: true, dateFormat: 'dd/MM/yyyy HH:mm:ss'},
+  {
+    name: 'Self Service', property: 'isSelf', sortable: true, render: row => {
+      const isSelf = row.isSelf;
+      const color = isSelf ? '#43a047' : '#d0021b';
+      const icon = isSelf ? 'pi pi-check' : 'pi pi-times';
+      return `<i class="${icon}" style="color: ${color}"></i>`;
+    }
+  },
   {name: 'Tipo Carburante', property: 'description', sortable: true},
   {name: 'Prezzo', property: 'price', isBold: true, sortable: true},
 ];
@@ -38,7 +45,7 @@ export class PriceListComponent implements OnInit {
 
   constructor(
     private service: PriceService,
-    private modalService: ModalService
+    private modalService: ModalService,
   ) {
   }
 
