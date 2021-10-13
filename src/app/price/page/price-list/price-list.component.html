@@ -1,7 +1,7 @@
 <div class="page-container">
   <div class="title">Prezzi</div>
   <app-table [headerData]="tableHeaderData" [data]="prices" [buttonData]="buttonData"
-             [cardMode]="true" [filterable]="true" buttonHeaderName="Azioni"
+             [cardMode]="true" [filterable]="true" buttonHeaderName="Azioni" [maxHeightPC]="calcMaxHeight()"
              [sort]="sort" (sortChange)="onSortChange($event)" (filterChange)="onFilterChange($event)"
              (buttonClick)="onButtonClick($event)" [maxHeightMobile]="calcMaxHeight()"></app-table>
   <div class="paginator">

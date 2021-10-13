@@ -8,7 +8,7 @@
       <div class="actions">
         <ul>
           <li>
-            <img src="assets/app/fuel.jpeg" alt="">
+            <img src="assets/app/fuel.svg" alt="">
             <span [routerLink]="'stations'" (click)="sidenav.toggle()"
                   routerLinkActive="active">Distributori</span>
           </li>
@@ -16,6 +16,11 @@
             <i class="pi pi-euro"></i>
             <span [routerLink]="'prices'" (click)="sidenav.toggle()"
                   routerLinkActive="active">Prezzi</span>
+          </li>
+          <li>
+            <i class="pi pi-book"></i>
+            <span [routerLink]="'fuels'" (click)="sidenav.toggle()"
+                  routerLinkActive="active">Carburanti & Prezzo minimo</span>
           </li>
         </ul>
         <p-divider></p-divider>

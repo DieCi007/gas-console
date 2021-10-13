@@ -1,0 +1,105 @@
+@import "../../../theme/variables";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 1rem 0;
+
+  .title {
+    font-weight: 500;
+    font-size: 2rem;
+    letter-spacing: 1.5px;
+    text-align: center;
+  }
+
+  .fuel-assign-form {
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+
+    .fuel-assign-container {
+      padding-top: 1rem;
+      width: 100%;
+      flex: 2;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+
+      .fuels-container {
+        width: 16rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 .2rem .5rem .2rem;
+
+        .fuels-container-title {
+          font-weight: 500;
+          font-size: 1.3rem;
+          letter-spacing: 1.2px;
+        }
+
+        .fuels-container-values {
+          border: 1px solid $secondary-transparent;
+          width: 100%;
+          flex: 1;
+          max-height: 25rem;
+          min-height: 20rem;
+          padding-left: .2rem;
+          overflow-y: auto;
+          position: relative;
+          box-shadow: 0 1px 6px 0 $shadow-light;
+
+          &.drag-active {
+            border-color: $success;
+            box-shadow: 0 1px 10px 0 $success;
+
+            .fuel-value {
+              pointer-events: none;
+            }
+          }
+
+          .fuel-value {
+            padding: .2rem 0;
+            text-decoration-line: underline;
+            cursor: grab;
+            width: max-content;
+
+            &:hover {
+              color: $primary-dark;
+            }
+          }
+
+          .empty {
+            position: absolute;
+            font-size: 1.1rem;
+            color: $gray-input;
+            bottom: 50%;
+            transform: rotate(-45deg);
+            pointer-events: none;
+          }
+        }
+      }
+    }
+
+    .price-assign-container {
+      width: 100%;
+      flex: 1.3;
+    }
+
+    .spinner {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(2px);
+    }
+  }
+}

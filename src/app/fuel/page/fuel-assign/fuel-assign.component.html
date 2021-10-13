@@ -1,0 +1,45 @@
+<div class="container">
+  <g-card [containerStyle]="{height: '100%', width: '100%', backgroundColor: 'white', padding: '1rem'}"
+          style="height: 100%; width: 100%">
+    <div class="title">Assegna i tipi del carburante</div>
+    <form class="fuel-assign-form">
+      <div class="fuel-assign-container">
+        <div class="not-assigned-fuels fuels-container">
+          <div class="fuels-container-title">NON ASSEGNATI</div>
+          <div class="fuels-container-values" #el pDroppable="fuels"
+               (onDragEnter)="onDragEnter(el)"
+               (onDragLeave)="onDragLeave(el)"
+               (onDrop)="onDrop(el)">
+            <div *ngFor="let notAssigned of notAssignedFuels" class="fuel-value"
+                 pDraggable="fuels" (onDragStart)="onDragStart(notAssigned)"
+                 dragEffect="copyLink" (onDragEnd)="onDragEnd()">
+              {{notAssigned.name}}
+            </div>
+            <div *ngIf="notAssignedFuels.length === 0" class="empty">Tutti i tipi assegnati</div>
+          </div>
+        </div>
+        <div *ngFor="let common of commonFuels" class="fuels-container">
+          <div class="fuels-container-title">{{common}}</div>
+          <div class="fuels-container-values" #el pDroppable="fuels"
+               (onDragEnter)="onDragEnter(el)"
+               (onDragLeave)="onDragLeave(el)"
+               (onDrop)="onDrop(el, common)">
+            <div *ngFor="let assigned of getAssignedFuels(common)" class="fuel-value"
+                 pDraggable="fuels" dragEffect="copyLink" (onDragStart)="onDragStart(assigned)"
+                 (onDragEnd)="onDragEnd()">
+              {{assigned.name}}
+            </div>
+            <div *ngIf="getAssignedFuels(common).length === 0" class="empty">Nessun carburante assegnato</div>
+          </div>
+        </div>
+      </div>
+      <div class="price-assign-container"></div>
+      <ng-container *ngIf="loading">
+        <div class="spinner">
+          <g-spinner></g-spinner>
+        </div>
+      </ng-container>
+    </form>
+  </g-card>
+</div>
+

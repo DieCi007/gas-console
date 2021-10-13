@@ -2,7 +2,7 @@
   <div class="title">Distributori</div>
   <app-table [headerData]="tableHeaderData" [data]="stations" [buttonData]="buttonData"
              [expandedHeaderData]="expandedHeaderData" [cardMode]="true" [filterable]="true" (filterChange)="onFilterChange($event)"
-             (buttonClick)="onButtonClick($event)" buttonHeaderName="Azioni"
+             (buttonClick)="onButtonClick($event)" buttonHeaderName="Azioni" [maxHeightPC]="calcMaxHeight()"
              [sort]="sort" (sortChange)="onSortChange($event)" [maxHeightMobile]="calcMaxHeight()"></app-table>
   <div class="paginator">
     <app-paginator [totalPages]="totalPages" [selectedSize]="currentSize"

@@ -13,7 +13,7 @@ const routes: Routes = [
     ],
     canActivate: [AuthGuard]
   },
-  {path: '**', component: PriceListComponent, pathMatch: 'full'}
+  {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 
 @NgModule({
