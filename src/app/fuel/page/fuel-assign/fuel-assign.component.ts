@@ -8,6 +8,7 @@ import { IFuelMinPrice } from '../../model/IFuelMinPrice';
 import { ModalService } from '../../../ui/modal.service';
 import { CommonFuelType } from '../../model/CommonFuelType';
 import * as _ from 'underscore';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-fuel-assign',
@@ -23,10 +24,18 @@ export class FuelAssignComponent implements OnInit {
   commonFuels = Object.values(CommonFuelType);
   draggedFuel: IExplicitFuel;
 
+  minPricesForm = this.fb.group({
+    gasolio: [0, [Validators.required]],
+    benzina: [0, [Validators.required]],
+    gpl: [0, [Validators.required]],
+    metano: [0, [Validators.required]],
+  });
+
   constructor(
     private service: FuelService,
     private minPriceService: MinPriceService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private fb: FormBuilder
   ) {
   }
 
@@ -43,7 +52,10 @@ export class FuelAssignComponent implements OnInit {
       })
     );
     const price$ = this.minPriceService.getMinPrices().pipe(
-      tap(res => this.minPrices = res)
+      tap(res => {
+        this.minPrices = res;
+        this.patchForm();
+      })
     );
     combineLatest([fuel$, price$]).pipe(
       catchError(err => {
@@ -88,5 +100,59 @@ export class FuelAssignComponent implements OnInit {
 
   onDragLeave(el: HTMLDivElement): void {
     el.classList.remove('drag-active');
+  }
+
+  patchForm(): void {
+    this.minPricesForm.patchValue({
+      gasolio: this.getPrice(CommonFuelType.GASOLIO),
+      benzina: this.getPrice(CommonFuelType.BENZINA),
+      gpl: this.getPrice(CommonFuelType.GPL),
+      metano: this.getPrice(CommonFuelType.METANO),
+    });
+  }
+
+  getPrice(fuelType: CommonFuelType): number {
+    return this.minPrices?.find(p => p.type === fuelType)?.minPrice || 0;
+  }
+
+  onSubmit(): void {
+    this.loading = true;
+    const minPrice$ = this.minPriceService.updatePrices([
+      {type: CommonFuelType.METANO, minPrice: this.metano.value},
+      {type: CommonFuelType.GPL, minPrice: this.gpl.value},
+      {type: CommonFuelType.GASOLIO, minPrice: this.gasolio.value},
+      {type: CommonFuelType.BENZINA, minPrice: this.benzina.value},
+    ]);
+    const fuelAssign$ = this.service.updateExplicitFuels([
+      {type: CommonFuelType.METANO, fuels: this.getAssignedFuels(CommonFuelType.METANO).map(f => f.id)},
+      {type: CommonFuelType.GPL, fuels: this.getAssignedFuels(CommonFuelType.GPL).map(f => f.id)},
+      {type: CommonFuelType.GASOLIO, fuels: this.getAssignedFuels(CommonFuelType.GASOLIO).map(f => f.id)},
+      {type: CommonFuelType.BENZINA, fuels: this.getAssignedFuels(CommonFuelType.BENZINA).map(f => f.id)},
+    ]);
+    combineLatest([minPrice$, fuelAssign$]).pipe(
+      catchError(err => {
+        this.loading = false;
+        this.modalService.handleError(err.error);
+        return throwError(err);
+      }),
+      finalize(() => this.loading = false)
+    ).subscribe();
+  }
+
+
+  get gasolio(): FormControl {
+    return this.minPricesForm.get('gasolio') as FormControl;
+  }
+
+  get benzina(): FormControl {
+    return this.minPricesForm.get('benzina') as FormControl;
+  }
+
+  get gpl(): FormControl {
+    return this.minPricesForm.get('gpl') as FormControl;
+  }
+
+  get metano(): FormControl {
+    return this.minPricesForm.get('metano') as FormControl;
   }
 }

@@ -10,6 +10,7 @@
     font-size: .9rem;
     color: $danger;
     margin-top: 5px;
+    position: absolute;
   }
 
   span {
@@ -40,7 +41,7 @@
     border: none;
     font-size: 1.4rem;
     border-bottom: 1px solid $black;
-    padding: 5px 25px 2px 0;
+    padding: 5px 0 2px 0;
     color: $gray-input;
     width: 100%;
 
@@ -67,7 +68,7 @@
   }
 
   input.normal:focus ~ span, input.normal.active ~ span {
-    transform: translateY(-1.2rem);
+    transform: translateY(-1.3rem);
   }
 
   .error-border {

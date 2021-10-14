@@ -4,8 +4,10 @@ import { CommonModule } from '@angular/common';
 import { FuelRoutingModule } from './fuel-routing.module';
 import { MainComponent } from './page/main/main.component';
 import { FuelAssignComponent } from './page/fuel-assign/fuel-assign.component';
-import { CardModule, SpinnerModule } from '../../../../gas-angular-ui/dist/g-ui';
+import { ButtonModule, CardModule, InputFieldModule, SpinnerModule } from '../../../../gas-angular-ui/dist/g-ui';
 import { DragDropModule } from 'primeng/dragdrop';
+import { TooltipModule } from 'primeng/tooltip';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +17,11 @@ import { DragDropModule } from 'primeng/dragdrop';
     FuelRoutingModule,
     CardModule,
     SpinnerModule,
-    DragDropModule
+    DragDropModule,
+    TooltipModule,
+    ReactiveFormsModule,
+    InputFieldModule,
+    ButtonModule
   ]
 })
 export class FuelModule { }

@@ -5,3 +5,8 @@ export interface IFuelMinPrice {
   type: CommonFuelType;
   minPrice: number;
 }
+
+export interface IFuelMinPriceUpdateReq {
+  type: CommonFuelType;
+  minPrice: number;
+}

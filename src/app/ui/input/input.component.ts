@@ -16,6 +16,12 @@ export class InputComponent {
   @Input() type: 'text' | 'password' = 'text';
   @Input() font: 'normal' | 'large' = 'large';
   @Input() width = '100%';
+  @Input() textAlign: string | 'center';
+
+  isActive(): boolean {
+    const val = this.control.value;
+    return val !== null && val !== undefined && (val === 0 || !!val);
+  };
 
   get control(): FormControl {
     return this.form?.get(this.controlName) as FormControl;

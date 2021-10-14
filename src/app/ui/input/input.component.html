@@ -1,7 +1,7 @@
 <label class="input-control" [style]="{width: width}"
        [ngClass]="{'mod-error': control.invalid && (control.dirty || control.touched)}">
-  <input [ngClass]="{'active': !!control.value, 'normal': font==='normal'}"
-         [type]="type" [formControl]="control" [formGroup]="form"
+  <input [ngClass]="{'active': isActive(), 'normal': font==='normal'}"
+         [type]="type" [formControl]="control" [formGroup]="form" [style]="{textAlign: textAlign && 'center'}"
          [autofocus]="autofocus" [autocomplete]="autocomplete"/>
   <span>{{label}}</span>
   <label class="disabled-view" [ngClass]="{'normal': font==='normal'}">
