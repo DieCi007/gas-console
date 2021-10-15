@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 export interface ITableHeaderData {
   name: string;
-  sortable: boolean;
+  sortable?: boolean;
   property: string;
   isBold?: boolean;
   dateFormat?: string;
@@ -128,7 +128,7 @@ export class TableComponent<T> implements OnInit, OnDestroy {
   }
 
   onSortChange(property: string): void {
-    if (property === this.sort.field) {
+    if (property === this.sort?.field) {
       return this.sortChange.emit({
         field: property,
         type: this.sort.type === SortType.ASC ? SortType.DESC : SortType.ASC

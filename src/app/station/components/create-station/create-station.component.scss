@@ -1,0 +1,87 @@
+@import "../../../theme/variables";
+
+:host {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  background-color: $body;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 50rem;
+  max-height: max-content;
+  max-width: 95vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  .title {
+    font-weight: 500;
+    font-size: 1.5rem;
+    letter-spacing: 1.5px;
+    padding-bottom: 1rem;
+    text-align: center;
+  }
+
+  .data-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .data-title, .expected-title {
+      font-size: 1.1rem;
+    }
+
+    .data {
+      letter-spacing: 1.2px;
+      color: $gray-input;
+    }
+
+    .expected {
+      font-style: italic;
+    }
+  }
+
+  .form-container {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .station-form {
+      width: 100%;
+      padding-top: 1rem;
+
+      .fields {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+
+        > * {
+          padding: .5rem 1rem
+        }
+      }
+
+      .button-container {
+        margin: 1rem;
+        display: flex;
+        justify-content: space-evenly;
+      }
+    }
+  }
+
+  .spinner-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

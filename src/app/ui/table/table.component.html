@@ -12,9 +12,9 @@
       <tr [ngClass]="{primary: headerColor==='primary', secondary: headerColor==='secondary'}"
           [ngStyle]="{backgroundColor:!['primary','secondary'].includes(headerColor) && headerColor}">
         <th *ngFor="let data of headerData" (click)="onSortChange(data.property)">{{data.name}}
-          <i class="sort-element pi {{data.property === sort.field &&
-          sort && sort.type === 'ASC' ? 'pi-sort-up' : 'pi-sort-down'}}"
-             [class.active]="data.property === sort.field"></i></th>
+          <i class="sort-element pi {{sort && data.property === sort.field &&
+          sort.type === 'ASC' ? 'pi-sort-up' : 'pi-sort-down'}}"
+             [class.active]="data.property === sort?.field"></i></th>
         <th>{{buttonData?.length > 0 ? buttonHeaderName : ''}}</th>
       </tr>
       </thead>
@@ -65,7 +65,7 @@
     </table>
 
     <ng-template #custom>
-      <div class="custom-table-filter"
+      <div class="custom-table-filter" *ngIf="filterable"
            [ngClass]="{primary: headerColor==='primary', secondary: headerColor==='secondary'}"
            [ngStyle]="{backgroundColor:!['primary','secondary'].includes(headerColor) && headerColor}">
         <g-input-field font="large" width="20rem"

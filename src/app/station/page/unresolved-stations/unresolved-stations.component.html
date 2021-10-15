@@ -1,0 +1,16 @@
+<div class="page-container" [@slideInRightOnEnter] [@fadeOutOnLeave]>
+  <div class="title-container">
+    <div class="stations-link">
+      <span><i class="pi pi-angle-left"></i><a routerLink="/stations">distributori</a></span>
+    </div>
+    <div class="title">Dati Corrotti</div>
+    <div class="spacer"></div>
+  </div>
+  <app-table [headerData]="tableHeaderData" [data]="unresolvedStations"
+             [buttonData]="buttonData" [cardMode]="true"
+             (buttonClick)="onButtonClick($event)" buttonHeaderName="Azioni"
+  [maxHeightMobile]="calcMaxHeight()" [maxHeightPC]="calcMaxHeight()"></app-table>
+  <div class="spinner-container" *ngIf="loading">
+    <g-spinner></g-spinner>
+  </div>
+</div>

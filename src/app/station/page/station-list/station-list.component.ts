@@ -9,12 +9,13 @@ import { IButtonClickData, ISortInfo, ITableButtonData, ITableHeaderData, TableB
 import { IPageStatus } from '../../../ui/paginator/paginator.component';
 import { ModalService } from '../../../ui/modal.service';
 import { EditStationComponent } from '../../components/edit-station/edit-station.component';
+import { fadeOutOnLeaveAnimation, slideInLeftOnEnterAnimation, } from 'angular-animations';
 
 const initialPageRequest: IPaginatedRequest = {
   sortType: SortType.ASC,
   sortBy: 'id',
   size: 25,
-  page: 0
+  page: 0,
 };
 
 const tableHeaderData: ITableHeaderData[] = [
@@ -51,13 +52,17 @@ const buttonData: ITableButtonData[] = [
 @Component({
   selector: 'app-station-list',
   templateUrl: './station-list.component.html',
-  styleUrls: ['./station-list.component.scss']
+  styleUrls: ['./station-list.component.scss'],
+  animations: [
+    slideInLeftOnEnterAnimation({duration: 300}),
+    fadeOutOnLeaveAnimation({duration: 300})
+  ]
 })
 export class StationListComponent implements OnInit, OnDestroy {
 
   constructor(
     private service: GasStationService,
-    private modalService: ModalService
+    private modalService: ModalService,
   ) {
   }
 

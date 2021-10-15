@@ -128,6 +128,7 @@ export class FuelAssignComponent implements OnInit {
       {type: CommonFuelType.GPL, fuels: this.getAssignedFuels(CommonFuelType.GPL).map(f => f.id)},
       {type: CommonFuelType.GASOLIO, fuels: this.getAssignedFuels(CommonFuelType.GASOLIO).map(f => f.id)},
       {type: CommonFuelType.BENZINA, fuels: this.getAssignedFuels(CommonFuelType.BENZINA).map(f => f.id)},
+      {type: null, fuels: this.getAssignedFuels(null).map(f => f.id)},
     ]);
     combineLatest([minPrice$, fuelAssign$]).pipe(
       catchError(err => {

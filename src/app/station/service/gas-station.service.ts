@@ -5,6 +5,7 @@ import { IPaginatedResponse } from '../../shared/model/IPaginatedResponse';
 import { IGasStationAnalyticsResponse } from '../model/IGasStationAnalyticsResponse';
 import { IPaginatedRequest } from '../../shared/model/IPaginatedRequest';
 import { environment } from '../../../environments/environment';
+import { IGasStation } from '../model/IGasStation';
 
 const STATION_CONTROLLER_PATH = 'gas/station';
 
@@ -35,6 +36,10 @@ export class GasStationService {
 
   updateStation(station: IGasStationAnalyticsResponse): Observable<IGasStationAnalyticsResponse> {
     return this.http.patch<IGasStationAnalyticsResponse>(environment.apiBaseUrl + STATION_CONTROLLER_PATH, station);
+  }
+
+  createStation(station: IGasStation): Observable<void> {
+    return this.http.post<void>(environment.apiBaseUrl + STATION_CONTROLLER_PATH, station);
   }
 
 }

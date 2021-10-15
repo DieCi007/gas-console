@@ -1,3 +1,5 @@
+import { GasStationStatus } from './IGasStationAnalyticsResponse';
+
 export interface IGasStation {
   id: number;
   owner: string;
@@ -9,4 +11,5 @@ export interface IGasStation {
   province: string;
   latitude: number;
   longitude: number;
+  status?: GasStationStatus;
 }

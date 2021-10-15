@@ -1,27 +1,36 @@
 <div class="container" [@fadeInOnEnter]>
-  <div class="title">Modifica Distributore</div>
+  <div class="title">Aggiungi Distributore</div>
+  <div class="data-container">
+    <div class="data-title">Info:</div>
+    <div class="data">{{data}}</div>
+    <br>
+    <div class="expected-title">Formato previsto:</div>
+    <div class="expected">ID; Gestore; Bandiera; Tipo Impianto; Nome Impianto; Indirizzo; Comune; Provincia; Latitudine;
+      Longitudine;
+    </div>
+  </div>
   <div class="form-container">
-    <form *ngIf="!loading else spinner" [formGroup]="stationForm"
+    <form [formGroup]="stationForm"
           class="station-form" (ngSubmit)="onSubmit()">
       <div class="fields">
+        <g-input-field font="normal" [form]="stationForm" controlName="id" label="ID"></g-input-field>
         <g-input-field font="normal" [form]="stationForm" controlName="owner" label="Di"></g-input-field>
         <g-input-field font="normal" [form]="stationForm" controlName="flag" label="Bandiera"></g-input-field>
+        <g-input-field font="normal" [form]="stationForm" controlName="type" label="Tipo"></g-input-field>
         <g-input-field font="normal" [form]="stationForm" controlName="name" label="Nome"></g-input-field>
+        <g-input-field font="normal" [form]="stationForm" controlName="address" label="Indirizzo"></g-input-field>
         <g-input-field font="normal" [form]="stationForm" controlName="municipality" label="Comune"></g-input-field>
         <g-input-field font="normal" [form]="stationForm" controlName="province" label="Provincia"></g-input-field>
-        <g-input-field font="normal" [form]="stationForm" controlName="address" label="Indirizzo"></g-input-field>
-        <g-input-field font="normal" [form]="stationForm" controlName="type" label="Tipo"></g-input-field>
         <g-input-field font="normal" [form]="stationForm" controlName="latitude" label="Latitudine"></g-input-field>
         <g-input-field font="normal" [form]="stationForm" controlName="longitude" label="Longitudine"></g-input-field>
         <app-switch-input label="Attivo" [form]="stationForm" controlName="status"></app-switch-input>
       </div>
       <div class="button-container">
-        <g-button label="Indietro" color="secondary" (clicked)="onBackClick()"></g-button>
-        <g-button [disabled]="stationForm.invalid" type="submit" label="Conferma" color="primary"></g-button>
+        <g-button [disabled]="stationForm.invalid" type="submit" label="Aggiungi" color="primary"></g-button>
       </div>
     </form>
-    <ng-template #spinner>
-      <g-spinner></g-spinner>
-    </ng-template>
+  </div>
+  <div class="spinner-container" *ngIf="loading">
+    <g-spinner></g-spinner>
   </div>
 </div>
