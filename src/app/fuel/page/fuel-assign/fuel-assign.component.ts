@@ -5,10 +5,10 @@ import { IExplicitFuel } from '../../model/IExplicitFuel';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { combineLatest, throwError } from 'rxjs';
 import { IFuelMinPrice } from '../../model/IFuelMinPrice';
-import { ModalService } from '../../../ui/modal.service';
 import { CommonFuelType } from '../../model/CommonFuelType';
 import * as _ from 'underscore';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ModalService } from '../../../../../../gas-angular-ui/dist/g-ui';
 
 @Component({
   selector: 'app-fuel-assign',

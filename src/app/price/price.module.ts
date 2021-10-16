@@ -5,7 +5,7 @@ import { PriceRoutingModule } from './price-routing.module';
 import { MainComponent } from './page/main/main.component';
 import { PriceListComponent } from './page/price-list/price-list.component';
 import { UiModule } from '../ui/ui.module';
-import { SpinnerModule } from '../../../../gas-angular-ui/dist/g-ui';
+import { PaginatorModule, SpinnerModule, TableModule } from 'g-ui';
 
 
 @NgModule({
@@ -14,7 +14,10 @@ import { SpinnerModule } from '../../../../gas-angular-ui/dist/g-ui';
     CommonModule,
     PriceRoutingModule,
     UiModule,
-    SpinnerModule
+    SpinnerModule,
+    TableModule,
+    PaginatorModule
   ]
 })
-export class PriceModule { }
+export class PriceModule {
+}

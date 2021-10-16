@@ -6,9 +6,8 @@ import {
 import { UnresolvedStationService } from '../../service/unresolved-station.service';
 import { IUnresolvedStationResponse } from '../../model/IUnresolvedStationResponse';
 import { catchError, finalize, tap } from 'rxjs/operators';
-import { ModalService } from '../../../ui/modal.service';
 import { throwError } from 'rxjs';
-import { IButtonClickData, ITableButtonData, ITableHeaderData, TableButtonType } from '../../../ui/table/table.component';
+import { IButtonClickData, ITableButtonData, ITableHeaderData, ModalService, TableButtonType } from 'g-ui';
 import { CreateStationComponent } from '../../components/create-station/create-station.component';
 
 const headerData: ITableHeaderData[] = [

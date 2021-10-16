@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { fadeInOnEnterAnimation } from 'angular-animations';
 import { GasStationService } from '../../service/gas-station.service';
-import { IModalInjectionData, MODAL_DATA, ModalService } from '../../../ui/modal.service';
+import { IModalInjectionData, MODAL_DATA, ModalService } from 'g-ui';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GasStationStatus } from '../../model/IGasStationAnalyticsResponse';
 import { catchError, finalize } from 'rxjs/operators';

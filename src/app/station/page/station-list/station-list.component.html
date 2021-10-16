@@ -6,15 +6,15 @@
       <span><a routerLink="unresolved">dati corrotti<i class="pi pi-angle-right"></i></a></span>
     </div>
   </div>
-  <app-table [headerData]="tableHeaderData" [data]="stations" [buttonData]="buttonData"
+  <g-table [headerData]="tableHeaderData" [data]="stations" [buttonData]="buttonData"
              [expandedHeaderData]="expandedHeaderData" [cardMode]="true" [filterable]="true"
              (filterChange)="onFilterChange($event)"
              (buttonClick)="onButtonClick($event)" buttonHeaderName="Azioni" [maxHeightPC]="calcMaxHeight()"
-             [sort]="sort" (sortChange)="onSortChange($event)" [maxHeightMobile]="calcMaxHeight()"></app-table>
+             [sort]="sort" (sortChange)="onSortChange($event)" [maxHeightMobile]="calcMaxHeight()"></g-table>
   <div class="paginator">
-    <app-paginator [totalPages]="totalPages" [selectedSize]="currentSize"
+    <g-paginator [totalPages]="totalPages" [selectedSize]="currentSize"
                    currentPageLabel="Pagina" perPageLabel="Elementi per pagina"
-                   [selectedPage]="currentPage" (valueChange)="onPaginatorChange($event)"></app-paginator>
+                   [selectedPage]="currentPage" (valueChange)="onPaginatorChange($event)"></g-paginator>
   </div>
   <div class="spinner-container" *ngIf="isLoading">
     <g-spinner></g-spinner>

@@ -1,14 +1,14 @@
 <div class="page-container">
   <div class="title">Prezzi</div>
-  <app-table [headerData]="tableHeaderData" [data]="prices" [buttonData]="buttonData"
+  <g-table [headerData]="tableHeaderData" [data]="prices" [buttonData]="buttonData"
              [cardMode]="true" [filterable]="true" buttonHeaderName="Azioni" [maxHeightPC]="calcMaxHeight()"
              [sort]="sort" (sortChange)="onSortChange($event)" (filterChange)="onFilterChange($event)"
-             (buttonClick)="onButtonClick($event)" [maxHeightMobile]="calcMaxHeight()"></app-table>
+             (buttonClick)="onButtonClick($event)" [maxHeightMobile]="calcMaxHeight()"></g-table>
   <div class="paginator">
-    <app-paginator [totalPages]="totalPages" currentPageLabel="Pagina"
+    <g-paginator [totalPages]="totalPages" currentPageLabel="Pagina"
                    [selectedSize]="currentSize" [selectedPage]="currentPage"
                    perPageLabel="Elementi per pagina"
-                   (valueChange)="onPaginatorChange($event)"></app-paginator>
+                   (valueChange)="onPaginatorChange($event)"></g-paginator>
   </div>
   <div class="spinner-container" *ngIf="loading">
     <g-spinner></g-spinner>

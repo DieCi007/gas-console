@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { IModalInjectionData, MODAL_DATA, ModalService } from '../../../ui/modal.service';
+import { IModalInjectionData, MODAL_DATA, ModalService } from 'g-ui';
 import { OverlayRef } from '@angular/cdk/overlay';
 import { GasStationService } from '../../service/gas-station.service';
 import { GasStationStatus, IGasStationAnalyticsResponse } from '../../model/IGasStationAnalyticsResponse';

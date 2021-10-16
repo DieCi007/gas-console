@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { IPaginatedRequest } from '../../../shared/model/IPaginatedRequest';
 import { SortType } from '../../../shared/model/SortType';
 import { PriceService } from '../../service/price.service';
-import { ModalService } from '../../../ui/modal.service';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, finalize, switchMap, tap } from 'rxjs/operators';
-import { IButtonClickData, ISortInfo, ITableButtonData, ITableHeaderData, TableButtonType } from '../../../ui/table/table.component';
 import { IPriceAnalyticsResponse } from '../../model/IPriceAnalyticsResponse';
-import { IPageStatus } from '../../../ui/paginator/paginator.component';
+import { IPageStatus } from 'g-ui';
+import { IButtonClickData, ISortInfo, ITableButtonData, ITableHeaderData, ModalService, TableButtonType } from 'g-ui';
 
 const initialPageRequest: IPaginatedRequest = {
   sortType: SortType.DESC,

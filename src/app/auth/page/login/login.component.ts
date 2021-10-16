@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { BreakpointService } from '../../../shared/service/breakpoint.service';
 import { Subscription, throwError } from 'rxjs';
 import { catchError, distinctUntilChanged, finalize, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
 import { AuthStoreService } from '../../service/auth-store.service';
 import { LS_AUTH_TOKEN, URL_STATIONS } from '../../../shared/constants';
+import { BreakpointService } from 'g-ui';
 
 @Component({
   selector: 'app-login',
