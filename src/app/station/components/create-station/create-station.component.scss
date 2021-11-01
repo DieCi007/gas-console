@@ -10,7 +10,9 @@
   padding: 1rem;
   border-radius: 10px;
   width: 50rem;
-  max-height: max-content;
+  height: max-content;
+  max-height: 90vh;
+  overflow-y: auto;
   max-width: 95vw;
   display: flex;
   flex-direction: column;
