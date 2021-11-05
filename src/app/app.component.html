@@ -4,6 +4,7 @@
       <div class="user-info">
         <i class="pi pi-user"></i>
         <h2>{{username | titlecase}}</h2>
+        <div class="logout" (click)="logout(); sidenav.toggle()"><i class="pi pi-sign-out"></i> Logout</div>
       </div>
       <div class="actions">
         <ul>

@@ -55,6 +55,10 @@ export class AuthService {
     return localStorage.getItem(LS_REFRESH_TOKEN);
   }
 
+  isLoggedIn(): boolean {
+    return !!this.authStore.me;
+  }
+
   logout(): void {
     this.authStore.clearState();
     localStorage.clear();

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { AuthStoreService } from './auth/service/auth-store.service';
 import { tap } from 'rxjs/operators';
-import { NavComponent } from '../../../gas-angular-ui/dist/g-ui';
+import { AuthService } from './auth/service/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,8 @@ import { NavComponent } from '../../../gas-angular-ui/dist/g-ui';
 export class AppComponent implements OnInit {
   constructor(
     private title: Title,
-    private authStore: AuthStoreService
+    private authStore: AuthStoreService,
+    private authService: AuthService
   ) {
   }
 
@@ -27,5 +28,9 @@ export class AppComponent implements OnInit {
         this.isLoggedIn = !!me;
       })
     ).subscribe();
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }
