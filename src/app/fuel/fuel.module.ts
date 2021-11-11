@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FuelRoutingModule } from './fuel-routing.module';
 import { MainComponent } from './page/main/main.component';
 import { FuelAssignComponent } from './page/fuel-assign/fuel-assign.component';
-import { ButtonModule, CardModule, InputFieldModule, SpinnerModule } from '../../../../gas-angular-ui/dist/g-ui';
+import { ButtonModule, CardModule, InputFieldModule, SpinnerModule } from 'g-ui';
 import { DragDropModule } from 'primeng/dragdrop';
 import { TooltipModule } from 'primeng/tooltip';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -21,7 +21,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     TooltipModule,
     ReactiveFormsModule,
     InputFieldModule,
-    ButtonModule
+    ButtonModule,
+    ButtonModule,
+    CardModule
   ]
 })
 export class FuelModule { }
