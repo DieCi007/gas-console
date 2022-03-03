@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'http://api.gasadvisor.it/api/v1/'
+  apiBaseUrl: 'https://api.gasadvisor.it/api/v1/'
 };
